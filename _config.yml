@@ -96,8 +96,8 @@ author:
   name             : "Raymond Lai"
   avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
   bio              : ""
-  location         : ""
-  email            :
+  location         : "Singapore"
+  email            :  
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
