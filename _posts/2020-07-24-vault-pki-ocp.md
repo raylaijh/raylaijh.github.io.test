@@ -57,7 +57,6 @@ Consul is a service mesh solution that launches with a key-value store. Vault re
 The recommended way to run Consul on Kubernetes is via the Helm chart. Helm is a package manager that installs and configures all the necessary components to run Consul in several different modes. A Helm chart includes templates that enable conditional and parameterized execution. These parameters can be set through command-line arguments or defined in YAML.
 
 Create `helm-consul-values.yml` with the following contents:
-
 ```yaml
 global:
   datacenter: vault-kubernetes-guide
@@ -73,14 +72,12 @@ server:
 ```
 
 Add the HashiCorp Helm repository.
-
 ```css
 $ helm repo add hashicorp https://helm.releases.hashicorp.com
 "hashicorp" has been added to your repositories
 ```
 
 Install the latest version of the Consul Helm chart with parameters `helm-consul-values.yml` applied.
-
 ```css
 $ helm install consul hashicorp/consul --values helm-consul-values.yml
 ```
@@ -88,7 +85,6 @@ $ helm install consul hashicorp/consul --values helm-consul-values.yml
 Get all the pods within the default namespace. The Consul client and server pods are displayed here prefixed with `consul`.You should see 1x consul-server pods and N consul pods, where N is the number of worker nodes in the cluster.
 
 Wait until the server and client pods report that they are `Running` and ready `(1/1)`.
-
 ```css
 $ oc get pods -n default
 NAME                                    READY   STATUS    RESTARTS   AGE
@@ -102,7 +98,6 @@ consul-consul-server-0                  1/1     Running   0          20s
 The recommended way to run Vault on OpenShift is via the Helm chart. 
 
 Create `helm-vault-values.yml`
-
 ```yaml
 server:
   affinity: ""
@@ -111,7 +106,6 @@ server:
 ```
 
 Install the latest version of the Vault Helm chart with parameters `helm-vault-values.yml` applied
-
 ```css
 helm install vault hashicorp/vault --values helm-vault-values.yml
 ```
@@ -119,7 +113,6 @@ helm install vault hashicorp/vault --values helm-vault-values.yml
 The Vault pods and Vault Agent Injector pod are deployed in the default namespace.
 
 Get all pods running in the default namespace
-
 ```css
 $ oc get pods -n default
 
@@ -138,13 +131,12 @@ The `vault-0`, `vault-1`, `vault-2`, and `vault-agent-injector` pods are deploye
 ### Initialize and unseal Vault
 
 Initialize Vault with one key share and one key threshold. The unseal key is extracted and stored in `cluster-keys.json`
-
 ```css
 $ oc exec vault-0 -- vault operator init -key-shares=1 -key-threshold=1 -format=json > cluster-keys.json
 ```
 
-To display the unseal key:
 
+To display the unseal key:
 ```css
 $ cat cluster-keys.json | jq -r ".unseal_keys_b64[]"
 GDibK7TonxYICNjwvsxidNnwfh8YsYkG3kylZ+lV7lE=
