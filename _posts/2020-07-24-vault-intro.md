@@ -9,7 +9,7 @@ tags:
 ## Vault overview
 
 <figure>
-	<a href="https://github.com/raylaijh/raylaijh.github.io/blob/master/assets/images/vault_logo.png"><img src="https://github.com/raylaijh/raylaijh.github.io/blob/master/assets/images/vault_logo.png"></a>
+	<a href="https://www.vaultproject.io/docs/what-is-vault"><img src="https://github.com/raylaijh/raylaijh.github.io/blob/master/assets/images/vault_logo.png"></a>
 	
 </figure>
 
