@@ -33,6 +33,11 @@ Client Version: 4.4.8
 Server Version: 4.4.8
 Kubernetes Version: v1.17.1+3f6f40d
 ```
+
+```css
+$ helm version
+version.BuildInfo{Version:"v3.2.3+4.el8", GitCommit:"2160a65177049990d1b76efc67cb1a9fd21909b1", GitTreeState:"clean", GoVersion:"go1.13.4"}
+```
 ## 
 
 Fashion axe hella gastropub lo-fi kogi 90's aliquip +1 veniam delectus tousled. Cred sriracha locavore gastropub kale chips, iPhone mollit sartorial. Anim dolore 8-bit, pork belly dolor photo booth aute flannel small batch. Dolor disrupt ennui, tattooed whatever salvia Banksy sartorial roof party selfies raw denim sint meh pour-over. Ennui eu cardigan sint, gentrify iPhone cornhole.
