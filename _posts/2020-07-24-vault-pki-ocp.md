@@ -23,7 +23,7 @@ Vero laborum commodo occupy. Semiotics voluptate mumblecore pug. Cosby sweater u
 The following are required prior to the setup
 
   * Running OpenShift cluster
-  * Helm CLI installed
+  * Helm CLI installed (Refer [here][helm-ocp-install] to learn how to install Helm CLI on OpenShift 4)
   
 In my example, the following versions of OpenShift and Helm installed are as follows:
 
@@ -38,6 +38,8 @@ Kubernetes Version: v1.17.1+3f6f40d
 $ helm version
 version.BuildInfo{Version:"v3.2.3+4.el8", GitCommit:"2160a65177049990d1b76efc67cb1a9fd21909b1", GitTreeState:"clean", GoVersion:"go1.13.4"}
 ```
+
+[helm-ocp-install]: https://docs.openshift.com/container-platform/4.4/cli_reference/helm_cli/getting-started-with-helm-on-openshift-container-platform.html
 ## 
 
 Fashion axe hella gastropub lo-fi kogi 90's aliquip +1 veniam delectus tousled. Cred sriracha locavore gastropub kale chips, iPhone mollit sartorial. Anim dolore 8-bit, pork belly dolor photo booth aute flannel small batch. Dolor disrupt ennui, tattooed whatever salvia Banksy sartorial roof party selfies raw denim sint meh pour-over. Ennui eu cardigan sint, gentrify iPhone cornhole.
