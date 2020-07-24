@@ -11,7 +11,7 @@ tags:
 [![Foo](https://github.com/raylaijh/raylaijh.github.io/blob/master/assets/images/HashiCorp_Vault_Amazic_Marketplace.jpg)](https://www.vaultproject.io/docs/what-is-vault)
 
 <figure>
-	<a href="https://github.com/raylaijh/raylaijh.github.io/blob/master/assets/images/HashiCorp_Vault_Amazic_Marketplace.jpg"><img src="https://github.com/raylaijh/raylaijh.github.io/blob/master/assets/images/HashiCorp_Vault_Amazic_Marketplace.jpg"></a>
+	<a href="https://github.com/raylaijh/raylaijh.github.io/blob/master/assets/images/vault_logo.png"><img src="https://github.com/raylaijh/raylaijh.github.io/blob/master/assets/images/vault_logo.png"></a>
 	<figcaption><a href="http://www.flickr.com/photos/80901381@N04/7758832526/" title="Morning Fog Emerging From Trees by A Guy Taking Pictures, on Flickr">Morning Fog Emerging From Trees by A Guy Taking Pictures, on Flickr</a>.</figcaption>
 </figure>
 
