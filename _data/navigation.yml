@@ -7,7 +7,7 @@ main:
   - title: "Posts"
     url: /year-archive/
   - title: "Home"
-    url: /
+    url: https://raylaijh.github.io/
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"
