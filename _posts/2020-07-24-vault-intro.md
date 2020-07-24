@@ -9,7 +9,7 @@ tags:
 ## Vault overview
 
 <figure>
-	<a href="{{ site.url }}{{ site.baseurl }}/assets/images/vault_logo.png"><img src="{{ site.url }}{{ site.baseurl }}/assets/images/vault_logo.png"></a>
+	<a href="https://github.com/raylaijh/raylaijh.github.io/blob/master/assets/images/vault_logo.png"><img src="https://github.com/raylaijh/raylaijh.github.io/blob/master/assets/images/vault_logo.png"></a>
 	
 </figure>
 
