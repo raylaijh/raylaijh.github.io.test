@@ -9,8 +9,7 @@ tags:
 ## Vault overview
 
 <figure>
-	<a href="https://3.bp.blogspot.com/-oJqieCSS9rg/XH5c7jZPCTI/AAAAAAAAG0Q/Kxq3M7nvXSsaSFLUv0EyYo5aZELrg2fpACLcBGAs/w1200-h630-p-k-no-nu/1*1uBBtYhvuClK8AWry2xbmQ.png"><img src="https://3.bp.blogspot.com/-oJqieCSS9rg/XH5c7jZPCTI/AAAAAAAAG0Q/Kxq3M7nvXSsaSFLUv0EyYo5aZELrg2fpACLcBGAs/w1200-h630-p-k-no-nu/1*1uBBtYhvuClK8AWry2xbmQ.png"></a>
-	<figcaption><a href="http://www.flickr.com/photos/80901381@N04/7758832526/" title="Morning Fog Emerging From Trees by A Guy Taking Pictures, on Flickr">Morning Fog Emerging From Trees by A Guy Taking Pictures, on Flickr</a>.</figcaption>
+	<a href="https://www.amazic.com/media/catalog/category/HashiCorp_Vault_Amazic_Marketplace.jpg"><img src="https://www.amazic.com/media/catalog/category/HashiCorp_Vault_Amazic_Marketplace.jpg"></a>
 </figure>
 
 Vault is a open source tool developed by HashiCorp for securely accessing secrets. Secrets are essentially anything that you tight control over, such as API keys, passwords, or certificates. These information are usually sensitve information and most organzations have a designated team to manage them. 
