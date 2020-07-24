@@ -1,6 +1,14 @@
 ---
 published: false
 ---
+---
+title: "Vault + Kubernetes"
+tags: 
+  - vault
+  - kuberbetes
+  - hashicorp
+---
+
 ## Vault overview
 ![]({{site.baseurl}}/https://github.com/raylaijh/raylaijh.github.io/blob/master/assets/images/vault_logo.png)
 
