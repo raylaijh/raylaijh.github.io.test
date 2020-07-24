@@ -9,7 +9,7 @@ tags:
 ## Vault overview
 
 <figure>
-	<a href="https://github.com/raylaijh/raylaijh.github.io/blob/master/assets/images/vault_logo.png"><img src="https://github.com/raylaijh/raylaijh.github.io/blob/master/assets/images/vault_logo.png"></a>
+	<a href="https://3.bp.blogspot.com/-oJqieCSS9rg/XH5c7jZPCTI/AAAAAAAAG0Q/Kxq3M7nvXSsaSFLUv0EyYo5aZELrg2fpACLcBGAs/w1200-h630-p-k-no-nu/1*1uBBtYhvuClK8AWry2xbmQ.png"><img src="https://3.bp.blogspot.com/-oJqieCSS9rg/XH5c7jZPCTI/AAAAAAAAG0Q/Kxq3M7nvXSsaSFLUv0EyYo5aZELrg2fpACLcBGAs/w1200-h630-p-k-no-nu/1*1uBBtYhvuClK8AWry2xbmQ.png"></a>
 	<figcaption><a href="http://www.flickr.com/photos/80901381@N04/7758832526/" title="Morning Fog Emerging From Trees by A Guy Taking Pictures, on Flickr">Morning Fog Emerging From Trees by A Guy Taking Pictures, on Flickr</a>.</figcaption>
 </figure>
 
