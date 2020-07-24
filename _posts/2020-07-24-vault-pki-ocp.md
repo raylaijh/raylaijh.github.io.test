@@ -25,6 +25,8 @@ The following are required prior to the setup
   * Running OpenShift cluster
   * Helm CLI installed (Refer [here][helm-ocp-install] to learn how to install Helm CLI on OpenShift 4)
   
+Helm is a package manager that installs and configures all the necessary components to run Vault in several different modes. To install Vault via the Helm chart in the next step requires that you are logged in as administrator within a project.
+  
 In my example, the following versions of OpenShift and Helm installed are as follows:
 
 ```css
@@ -43,8 +45,6 @@ version.BuildInfo{Version:"v3.2.3+4.el8", GitCommit:"2160a65177049990d1b76efc67c
 
 ## Installing Vault on OpenShift
 
-The recommended way to run Vault on OpenShift is via the Helm chart. Helm is a package manager that installs and configures all the necessary components to run Vault in several different modes. To install Vault via the Helm chart in the next step requires that you are logged in as administrator within a project.
-
 We will follow the HashiCorp's [official document][vault-minikube] as a guide to install Vault. In this guide, Vault is deployed with Consul as a backend.
 
 [vault-minikube]: https://learn.hashicorp.com/vault/kubernetes/minikube
@@ -52,18 +52,103 @@ We will follow the HashiCorp's [official document][vault-minikube] as a guide to
 
 ### Install the Consul Helm chart
 
-> Whatever velit occaecat quis deserunt gastropub, leggings elit tousled roof party 3 wolf moon kogi pug blue bottle ea. 
+Consul is a service mesh solution that launches with a key-value store. Vault requires a storage backend like Consul to manage its configuration and secrets when it is run in high-availability.
 
-Tote bag asymmetrical elit sunt. Occaecat authentic Marfa, hella McSweeney's next level irure veniam master cleanse. Sed hoodie letterpress artisan wolf leggings, 3 wolf moon commodo ullamco. Anim occupy ea labore Terry Richardson. Tofu ex master cleanse in whatever pitchfork banh mi, occupy fugiat fanny pack Austin authentic. Magna fugiat 3 wolf moon, labore McSweeney's sustainable vero consectetur. Gluten-free disrupt enim, aesthetic fugiat jean shorts trust fund keffiyeh magna try-hard.
+The recommended way to run Consul on Kubernetes is via the Helm chart. Helm is a package manager that installs and configures all the necessary components to run Consul in several different modes. A Helm chart includes templates that enable conditional and parameterized execution. These parameters can be set through command-line arguments or defined in YAML.
 
-## Hoodie Duis
+Create `helm-consul-values.yml` with the following contents:
 
-Actually salvia consectetur, hoodie duis lomo YOLO sunt sriracha. Aute pop-up brunch farm-to-table odio, salvia irure occaecat. Sriracha small batch literally skateboard. Echo Park nihil hoodie, aliquip forage artisan laboris. Trust fund reprehenderit nulla locavore. Stumptown raw denim kitsch, keffiyeh nulla twee dreamcatcher fanny pack ullamco 90's pop-up est culpa farm-to-table. Selfies 8-bit do pug odio.
+```yaml
+global:
+  datacenter: vault-kubernetes-guide
 
-### Thundercats Ho!
+client:
+  enabled: true
 
-Fingerstache thundercats Williamsburg, deep v scenester Banksy ennui vinyl selfies mollit biodiesel duis odio pop-up. Banksy 3 wolf moon try-hard, sapiente enim stumptown deep v ad letterpress. Squid beard brunch, exercitation raw denim yr sint direct trade. Raw denim narwhal id, flannel DIY McSweeney's seitan. Letterpress artisan bespoke accusamus, meggings laboris consequat Truffaut qui in seitan. Sustainable cornhole Schlitz, twee Cosby sweater banh mi deep v forage letterpress flannel whatever keffiyeh. Sartorial cred irure, semiotics ethical sed blue bottle nihil letterpress.
+server:
+  replicas: 1
+  bootstrapExpect: 1
+  disruptionBudget:
+    maxUnavailable: 0
+```
 
-Occupy et selvage squid, pug brunch blog nesciunt hashtag mumblecore skateboard yr kogi. Ugh small batch swag four loko. Fap post-ironic qui tote bag farm-to-table american apparel scenester keffiyeh vero, swag non pour-over gentrify authentic pitchfork. Schlitz scenester lo-fi voluptate, tote bag irony bicycle rights pariatur vero Vice freegan wayfarers exercitation nisi shoreditch. Chambray tofu vero sed. Street art swag literally leggings, Cosby sweater mixtape PBR lomo Banksy non in pitchfork ennui McSweeney's selfies. Odd Future Banksy non authentic.
+Add the HashiCorp Helm repository.
 
-Aliquip enim artisan dolor post-ironic. Pug tote bag Marfa, deserunt pour-over Portland wolf eu odio intelligentsia american apparel ugh ea. Sunt viral et, 3 wolf moon gastropub pug id. Id fashion axe est typewriter, mlkshk Portland art party aute brunch. Sint pork belly Cosby sweater, deep v mumblecore kitsch american apparel. Try-hard direct trade tumblr sint skateboard. Adipisicing bitters excepteur biodiesel, pickled gastropub aute veniam.
+```css
+$ helm repo add hashicorp https://helm.releases.hashicorp.com
+"hashicorp" has been added to your repositories
+```
+
+Install the latest version of the Consul Helm chart with parameters `helm-consul-values.yml` applied.
+
+```css
+$ helm install consul hashicorp/consul --values helm-consul-values.yml
+```
+
+Get all the pods within the default namespace. The Consul client and server pods are displayed here prefixed with `consul`.You should see 1x consul-server pods and N consul pods, where N is the number of worker nodes in the cluster.
+
+Wait until the server and client pods report that they are `Running` and ready `(1/1)`.
+
+```css
+$ oc get pods -n default
+NAME                                    READY   STATUS    RESTARTS   AGE
+consul-consul-2llf7                     1/1     Running   0          20s
+consul-consul-6p7bb                     1/1     Running   0          20s
+consul-consul-server-0                  1/1     Running   0          20s
+```
+
+### Install the Vault Helm chart
+
+The recommended way to run Vault on OpenShift is via the Helm chart. 
+
+Create `helm-vault-values.yml`
+
+```yaml
+server:
+  affinity: ""
+  ha:
+    enabled: true
+```
+
+Install the latest version of the Vault Helm chart with parameters `helm-vault-values.yml` applied
+
+```css
+helm install vault hashicorp/vault --values helm-vault-values.yml
+```
+
+The Vault pods and Vault Agent Injector pod are deployed in the default namespace.
+
+Get all pods running in the default namespace
+
+```css
+$ oc get pods -n default
+
+NAME                                    READY   STATUS    RESTARTS   AGE
+consul-consul-2llf7                     1/1     Running   0          1m3s
+consul-consul-6p7bb                     1/1     Running   0          1m3s
+consul-consul-server-0                  1/1     Running   0          1m3s
+vault-0                                 0/1     Running   0          2m5s
+vault-1                                 0/1     Running   0          2m5s
+vault-2                                 0/1     Running   0          2m5s
+vault-agent-injector-7898f4df86-trdjn   1/1     Running   0          2m5s
+```
+
+The `vault-0`, `vault-1`, `vault-2`, and `vault-agent-injector` pods are deployed. The Vault servers report that they are `Running` but they are not ready `(0/1)`. That is because Vault in each pod is executes a status check defined in a readinessProbe. The readinessProbe is failing because the Vault pods are sealed.
+
+### Initialize and unseal Vault
+
+Initialize Vault with one key share and one key threshold. The unseal key is extracted and stored in `cluster-keys.json`
+
+```css
+$ oc exec vault-0 -- vault operator init -key-shares=1 -key-threshold=1 -format=json > cluster-keys.json
+```
+
+To display the unseal key:
+
+```css
+$ cat cluster-keys.json | jq -r ".unseal_keys_b64[]"
+GDibK7TonxYICNjwvsxidNnwfh8YsYkG3kylZ+lV7lE=
+```
+
+> Insecure operation: Do not run an unsealed Vault in production with a single key share and a single key threshold. This approach is only used here to simplify the unsealing process for this demonstration.
+
