@@ -42,5 +42,12 @@ One of the platforms which is commonly adopted by enterprises is Kubernetes. Kub
 
 ## Vault architecture on Kubernetes
 
+In a nutshell, how Kubernetes talk to Vault via the Kubernetes authentication method. Prior to that, Kubernetes administrator has to create a service account on their cluster as it will be used to talk to Vault. When agents/pods try to communicate with Vault, it will present the [Kubernetes JWT token][kube-token-doc] of this particular service account in order to authenticate to Vault API, before extracting any information from Vault. Post authentication, the service account can also be configured to bind to a certain policy predefined on Vault, so as to control which path the client can access in Vault. To understand specially on the detailed steps to perform the above, please refer to [HashiCorp Vault Learn page][vault-learn-page]. The architecture diagram below shows how the whole process described earlier.
 
+<center>
+<img align="center" src="/assets/images/vault_arch.png" alt="">
+</center>
+
+[vault-learn-page]: https://learn.hashicorp.com/vault/identity-access-management/vault-agent-k8s
+[kube-token-doc]: https://kubernetes.io/docs/reference/access-authn-authz/authentication/#service-account-tokens
 
