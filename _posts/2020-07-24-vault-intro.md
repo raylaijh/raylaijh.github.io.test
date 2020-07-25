@@ -15,7 +15,11 @@ tags:
 
 Vault is a open source tool developed by HashiCorp for securely accessing secrets. Secrets are essentially anything that you tight control over, such as API keys, passwords, or certificates. These information are usually sensitve information and most organzations have a designated team to manage them. 
 
-A modern system typically requires access to a multitude of secrets: database credentials, API keys for external services, credentials for service-oriented architecture communication, etc. Understanding who is accessing what secrets is already very difficult and platform-specific, hence Vault is one of the solutions in the market which provides a one stop management tool for secrets management, irregardless of platforms.
+A modern system typically requires access to a multitude of secrets: database credentials, API keys for external services, credentials for service-oriented architecture communication, etc. Understanding who is accessing what secrets is already very difficult and platform-specific, hence Vault is one of the solutions in the market which provides a one stop management tool for secrets management, irregardless of platforms. The image below shows how secrets are being consumed across a typical developer workflow, and how Vault can help to manage all these secrets across the infrastructure.
+
+<center>
+<img align="center" src="/assets/images/vault_before_after.png" alt="">
+</center>
 
 Here are some features of Vault, quoted from Vault [documentation][vault-doc] :
 
@@ -30,6 +34,8 @@ Here are some features of Vault, quoted from Vault [documentation][vault-doc] :
 * Leasing and Renewal: All secrets in Vault have a lease associated with them. At the end of the lease, Vault will automatically revoke that secret. Clients are able to renew leases via built-in renew APIs.
 
 * Revocation: Vault has built-in support for secret revocation. Vault can revoke not only single secrets, but a tree of secrets, for example all secrets read by a specific user, or all secrets of a particular type. Revocation assists in key rolling as well as locking down systems in the case of an intrusion.
+
+
 
 ## Vault on Kubernetes
 
