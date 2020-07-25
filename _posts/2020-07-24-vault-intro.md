@@ -9,7 +9,7 @@ tags:
 ## Vault overview
 
 <center>
-<img align="center" src="/assets/images/HashiCorp_Vault_Amazic_Marketplace.jpg" alt="">
+<img align="center" src="/assets/images/vault_logo.png" alt="">
 </center>
 
 
