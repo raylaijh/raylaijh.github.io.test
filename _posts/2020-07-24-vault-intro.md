@@ -9,7 +9,7 @@ tags:
 ## Vault overview
 
 <center>
-<img align="center" src="/assets/images/vault_logo.png" alt="">
+<img align="center" src="/assets/images/vault_logo_1.png" alt="">
 </center>
 
 
