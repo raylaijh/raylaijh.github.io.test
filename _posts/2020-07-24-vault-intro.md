@@ -40,9 +40,9 @@ Here are some features of Vault, quoted from Vault [documentation][vault-doc] :
 
 One of the platforms which is commonly adopted by enterprises is Kubernetes. Kubernetes allows monolithic applications to be broken down to many microservices, which encourages better DevOps flow of application development. However, with this architecture, microservices often have to talk to each other - which means secrets have to be configured with service accounts across the entire Kubernetes cluster. The number of secrets increases exponentially as the cluster size grow. This can lead to a potential secrets sprawl if the secrets are not managed well. Vault presents itself as a solution as it is a centralized secrets manager, which can help to control the way services acquire the secrets they need in order to communicate with other services.
 
-## Vault architecture on Kubernetes
+## Vault authentication workflow on Kubernetes
 
-In a nutshell, how Kubernetes talk to Vault via the Kubernetes authentication method. Prior to that, Kubernetes administrator has to create a service account on their cluster as it will be used to talk to Vault. When agents/pods try to communicate with Vault, it will present the [Kubernetes JWT token][kube-token-doc] of this particular service account in order to authenticate to Vault API, before extracting any information from Vault. Post authentication, the service account can also be configured to bind to a certain policy predefined on Vault, so as to control which path the client can access in Vault. To understand specially on the detailed steps to perform the above, please refer to [HashiCorp Vault Learn page][vault-learn-page]. The architecture diagram below shows how the whole process described earlier.
+In a nutshell, how Kubernetes talk to Vault via the Kubernetes authentication method. Prior to that, Kubernetes administrator has to create a service account on their cluster as it will be used to talk to Vault. When agents/pods try to communicate with Vault, it will present the [Kubernetes JWT token][kube-token-doc] of this particular service account in order to authenticate to Vault API, before extracting any information from Vault. Post authentication, the service account can also be configured to bind to a certain policy predefined on Vault, so as to control which path the client can access in Vault. To understand specially on the detailed steps to perform the above, please refer to [HashiCorp Vault Learn page][vault-learn-page]. The diagram below illustrates the whole process described earlier.
 
 <center>
 <img align="center" src="/assets/images/Vault_arch.png" alt="">
@@ -51,3 +51,24 @@ In a nutshell, how Kubernetes talk to Vault via the Kubernetes authentication me
 [vault-learn-page]: https://learn.hashicorp.com/vault/identity-access-management/vault-agent-k8s
 [kube-token-doc]: https://kubernetes.io/docs/reference/access-authn-authz/authentication/#service-account-tokens
 
+## Vault Agent Side-car injection
+
+We can leverage the Vault Agent Side-car Injector to pull secrets from Vault upon pod creation. This is useful for applications running in containers which depends on secrets to be available before it can begin to run. The Vault Side-car injector can pre-extract the required secrets and run as a init container and mount it as a shared volume, prior to running your applications. More examples can be found in the documentation below.
+
+* Documentation: [https://www.vaultproject.io/docs/platform/k8s/injector/][link1]
+* More Examples: [https://www.vaultproject.io/docs/platform/k8s/injector/examples/][link2]
+
+[link1]: https://www.vaultproject.io/docs/platform/k8s/injector/
+[link2]: https://www.vaultproject.io/docs/platform/k8s/injector/examples/
+
+This diagram further illustrates the workflow with Vault Agent Side-car injection when running on Kubernetes
+<center>
+<img align="center" src="/assets/images/vault_arch_sidecar.png" alt="">
+</center>
+
+## References
+* [HashiCorp Vault: Delivering Secrets with Kubernetes][link3]
+* [Getting Started with HashiCorp Vault][link4]
+
+[link3]: https://medium.com/hashicorp-engineering/hashicorp-vault-delivering-secrets-with-kubernetes-1b358c03b2a3
+[link4]: https://medium.com/rafay-systems/getting-started-with-hashicorp-vault-ac9f67d7e519
