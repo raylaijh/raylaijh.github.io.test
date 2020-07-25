@@ -8,9 +8,11 @@ tags:
 
 ## Vault overview
 
-<p class="aligncenter">
-<img src="/assets/images/HashiCorp_Vault_Amazic_Marketplace.jpg" alt="">
-</p>
+<center>
+<img align="center" src="/assets/images/HashiCorp_Vault_Amazic_Marketplace.jpg" alt="">
+</center>
+
+
 Vault is a open source tool developed by HashiCorp for securely accessing secrets. Secrets are essentially anything that you tight control over, such as API keys, passwords, or certificates. These information are usually sensitve information and most organzations have a designated team to manage them. 
 
 A modern system typically requires access to a multitude of secrets: database credentials, API keys for external services, credentials for service-oriented architecture communication, etc. Understanding who is accessing what secrets is already very difficult and platform-specific, hence Vault is one of the solutions in the market which provides a one stop management tool for secrets management, irregardless of platforms.
