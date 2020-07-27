@@ -130,6 +130,13 @@ $ vault write auth/kubernetes/role/issuer \
 Success! Data written to: auth/kubernetes/role/issuer
 ```
 
+Exit from the `vault-0` pod
+
+```css
+$ exit
+```
+
+
 ## Deploy Cert Manager
 
 Jetstack's cert-manager is a Kubernetes add-on that automates the management and issuance of TLS certificates from various issuing sources. Vault can be configured as one of those sources. To understand more about this cert-manager, check out the links below.
