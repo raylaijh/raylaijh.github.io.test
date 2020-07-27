@@ -141,8 +141,12 @@ $ exit
 
 Jetstack's cert-manager is a Kubernetes add-on that automates the management and issuance of TLS certificates from various issuing sources. Vault can be configured as one of those sources. To understand more about this cert-manager, check out the links below.
 
-* https://github.com/jetstack/cert-manager
-* https://cert-manager.io/docs/installation/kubernetes/
+
+* [https://github.com/jetstack/cert-manager][link1]
+* [https://cert-manager.io/docs/installation/kubernetes/][link2]
+
+[link1]: https://github.com/jetstack/cert-manager
+[link2]: https://github.com/jetstack/cert-manager
 
 Install Jetstack's cert-manager's version 0.14.3 resources.
 
