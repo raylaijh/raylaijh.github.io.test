@@ -10,7 +10,7 @@ tags:
 ---
 
 <center>
-<img align="center" src="/assets/images/vault_cm_ocp.png" alt="">
+<img align="center" src="/assets/images/vault_cm_ocp.png" alt=""> 
 </center>
 
 
