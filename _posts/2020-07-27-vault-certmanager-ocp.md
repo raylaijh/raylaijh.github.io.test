@@ -20,7 +20,7 @@ Most of the steps documented below are taken from Vault documentation [here][vau
 
 ## Prerequisites
 
-The following are required prior to the setup
+The following are required prior to the setup:
 
   * Running OpenShift cluster
   * Helm CLI installed (Refer [here][helm-ocp-install] to learn how to install Helm CLI on OpenShift 4)
