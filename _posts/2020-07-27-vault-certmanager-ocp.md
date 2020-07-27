@@ -26,6 +26,7 @@ The following are required prior to the setup
   * Helm CLI installed (Refer [here][helm-ocp-install] to learn how to install Helm CLI on OpenShift 4)
   * Vault running on OpenShift (refer to previous blog entry [here][vault-ocp])
   
+  [helm-ocp-install]: https://docs.openshift.com/container-platform/4.4/cli_reference/helm_cli/getting-started-with-helm-on-openshift-container-platform.html
   [vault-ocp]: https://raylaijh.github.io/vault-ocp/
   
 
