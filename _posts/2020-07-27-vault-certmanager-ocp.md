@@ -9,6 +9,11 @@ tags:
   - pki
 ---
 
+<center>
+<img align="center" src="/assets/images/vault_cm_ocp.png" alt="">
+</center>
+
+
 In this post, we will proceed to try on some of the features that Vault can offer as a secrets manager. One of the feature is that Vault is able to be configured as a certifcate manager. This enables your services to establish their identity and communicate securely over the network with other services or clients internal or external to the cluster.
 
 Jetstack's cert-manager enables Vault's PKI secrets engine to dynamically generate X.509 certificates within OpenShift through an Issuer interface.
