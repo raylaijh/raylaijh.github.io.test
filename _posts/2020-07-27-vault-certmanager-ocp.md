@@ -19,7 +19,7 @@ In this post, we will proceed to try on some of the features that Vault can offe
 Jetstack's cert-manager enables Vault's PKI secrets engine to dynamically generate X.509 certificates within OpenShift through an Issuer interface.
 In this guide, we will configure the PKI secrets engine and OpenShift authentication. Then install Jetstack's cert-manager, configure it to use Vault, and request a certificate.
 
-Most of the steps documented below are taken from Vault documentation [here][vault-certmanager]. We will continue to use OpenShift as the Kubernetes plaform for the steps below.
+Most of the steps documented below are taken from Vault documentation [here][vault-certmanager]. We are using Red Hat OpenShift as the Kubernetes plaform for the steps below.
 
 [vault-certmanager]: https://learn.hashicorp.com/vault/kubernetes/cert-manager
 
