@@ -157,7 +157,7 @@ Jetstack's cert-manager is a Kubernetes add-on that automates the management and
 Install Jetstack's cert-manager's version 0.14.3 resources.
 
 ```css
-oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.14.3/cert-manager.crds.yaml
+$ oc apply --validate=false -f https://github.com/jetstack/cert-manager/releases/download/v0.14.3/cert-manager.crds.yaml
 customresourcedefinition.apiextensions.k8s.io/challenges.acme.cert-manager.io created
 customresourcedefinition.apiextensions.k8s.io/orders.acme.cert-manager.io created
 customresourcedefinition.apiextensions.k8s.io/certificaterequests.cert-manager.io created
