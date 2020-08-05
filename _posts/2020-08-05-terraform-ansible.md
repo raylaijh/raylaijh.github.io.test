@@ -66,8 +66,8 @@ resource "aws_instance" "example" {
 
 Both codes are human readable and easy for administrators who may not have coding background to develop. As long as you have defined the "key words", which we refer to as `provider` and `resource` in Terraform, `modules` in Ansible, both Terraform and Ansible will be able to recognize them and perform the intended tasks. The entire list of usable "key words" are documented the official website of both tools. 
 
-Terraform: [https://www.terraform.io/docs/configuration/index.html](https://www.terraform.io/docs/configuration/index.html)
-Ansible: [https://docs.ansible.com/ansible/latest/modules/modules_by_category.html](https://docs.ansible.com/ansible/latest/modules/modules_by_category.html)
+* Terraform: [https://www.terraform.io/docs/configuration/index.html](https://www.terraform.io/docs/configuration/index.html)
+* Ansible: [https://docs.ansible.com/ansible/latest/modules/modules_by_category.html](https://docs.ansible.com/ansible/latest/modules/modules_by_category.html)
 
 ### Readily available resources
 
