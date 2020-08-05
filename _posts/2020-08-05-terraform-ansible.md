@@ -27,13 +27,11 @@ The idea of "Infrastructure as a Code" allows the definition of the desired infr
 There are currently many options in the market which allows users to reap on the benefits of IaC. Ideally, the tool used should preferrable be platform agnostic, so that the same tool can be used to manage multiple cloud providers. In this post, I will share on mainly the two tools which I have experienced using, which are Terraform and Ansible. Both are Open Source options and you can check their upstream GitHub for more information. Also, you can checkout both HashiCorp and Red Hat official documentation as well.
 
 
-Ansible GitHub: [https://github.com/ansible/ansible](https://github.com/ansible/ansible)
-Official Ansible documentation: [https://docs.ansible.com/](https://docs.ansible.com/)
-Terraform GitHub: [https://github.com/hashicorp/terraform](https://github.com/hashicorp/terraform)
-Official Terraform intro: [https://www.terraform.io/intro/index.html](https://www.terraform.io/intro/index.html)
+* Ansible GitHub: [https://github.com/ansible/ansible](https://github.com/ansible/ansible)
+* Official Ansible documentation: [https://docs.ansible.com/](https://docs.ansible.com/)
+* Terraform GitHub: [https://github.com/hashicorp/terraform](https://github.com/hashicorp/terraform)
+* Official Terraform intro: [https://www.terraform.io/intro/index.html](https://www.terraform.io/intro/index.html)
 
-
-> Disclaimer: The following information are based on my personal experience in using them. There might be other features which I have not touched on which could make one better than the other in some cases. The following content are meant to illustrate a high level comparison between the two tools.
 
 ### Ease of Coding
 
