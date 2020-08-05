@@ -1,57 +1,89 @@
 ---
-title: "Running Vault on OpenShift"
+title: "Terraform or Ansible?"
 tags: 
-  - vault
-  - openshift
+  - ansible
+  - redhat
   - hashicorp
-  - consul
-  - helm
+  - terraform
 ---
 
-Having discussed on Vault on Kubernetes in the [previous post][vault-intro], we will proceed with the detailed steps on running Vault on Kubernetes. In this scenario, we will run Vault on [OpenShift][ocp-docs], which is an enterprise version of Kubernetes developed by Red Hat.
+### What is Infrastructure as a Code?
 
-[ocp-docs]: https://docs.openshift.com/
-[vault-intro]: https://raylaijh.github.io/vault-intro
+With the advent of technology in the 21st century, more and more organizations are beginning to embrace technology in their environment. This rising trend creates an ever increasing demand for new IT infrastructure, which also gives rise to many different options in the market. With so many options, many companies tend to end up adopting multiple cloud setups, running in their workloads. Managing all these different setups can be complex and often mundane, as system administrators had manually manage and configure the hardware and software that are required to run applications.
 
-The following steps show how to use Helm to install Vault on OpenShift. Most of the steps are taken from the references below:
+However, in the recent years, several solutions are available in the market in order to help organizations manage all these infrastructure in a automated and repeated manner. The cricital component of such solutions revolve around using "Infrastructure as a Code (IaC)". Here is how [Wikipedia][wikilink] defines IaC:
 
-  * [https://learn.hashicorp.com/vault/kubernetes/minikube][link1]
-  * [https://learn.hashicorp.com/vault/new-release/openshift][link2]
-  
-[link1]: https://learn.hashicorp.com/vault/kubernetes/minikube
-[link2]: https://learn.hashicorp.com/vault/new-release/openshift
+[wikilink]: https://en.wikipedia.org/wiki/Infrastructure_as_code
 
-## Prerequisites
+> "Infrastructure as code is the process of managing and provisioning computer data centers through machine-readable definition files, rather than physical hardware configuration or interactive configuration tools" 
 
-The following are required prior to the setup
+The idea of "Infrastructure as a Code" allows the definition of the desired infrastructure setup to be condensed in a code and then be consumed on demand. Defining the infrastructure in a machine readable format is the first step of automation. Once that is done, we can store these code somewhere, and use to automate the provisioning or maintaince of the infrastructure, in the way which we want it to be. In this way, we can achieve speed in deployment, consistency in rolling out and full tracibility of configuration made to the infrastructure. All these benefits also mean saving time and money. 
 
-  * Running OpenShift cluster
-  * Helm CLI installed (Refer [here][helm-ocp-install] to learn how to install Helm CLI on OpenShift 4)
-  
-Helm is a package manager that installs and configures all the necessary components to run Vault in several different modes. To install Vault via the Helm chart in the next step requires that you are logged in as administrator within a project.
-  
-In my example, the following versions of OpenShift and Helm installed are as follows:
+
+## IaC options 
+
+There are currently many options in the market which allows users to reap on the benefits of IaC. Ideally, the tool used should preferrable be platform agnostic, so that the same tool can be used to manage multiple cloud providers. In this post, I will share on mainly the two tools which I have experienced using, which are Terraform and Ansible. Both are Open Source options and you can check their upstream GitHub for more information. Also, you can checkout both HashiCorp and Red Hat official documentation as well.
+
+
+Ansible GitHub: [https://github.com/ansible/ansible](https://github.com/ansible/ansible)
+Official Ansible documentation: [https://docs.ansible.com/](https://docs.ansible.com/)
+Terraform GitHub: [https://github.com/hashicorp/terraform](https://github.com/hashicorp/terraform)
+Official Terraform intro: [https://www.terraform.io/intro/index.html](https://www.terraform.io/intro/index.html)
+
+
+> Disclaimer: The following information are based on my personal experience in using them. There might be other features which I have not touched on which could make one better than the other in some cases. The following content are meant to illustrate a high level comparison between the two tools.
+
+### Ease of Coding
+
+As a tools which levearage on Infrastructure as a Code, ease of developing these codes is vital for users. In Terraform, the code is written in HCL (HashiCorp Configuration Language), while in Ansible, it is YAML (YAML Ain't Markup Language). Below are some snippets of the code used to provision a simple instance on AWS.
+
 
 ```css
-$ oc version
-Client Version: 4.4.8
-Server Version: 4.4.8
-Kubernetes Version: v1.17.1+3f6f40d
+# example main.tf in Terraform
+provider "aws" {
+  profile = "default"
+  region  = "us-east-1"
+}
+
+resource "aws_instance" "example" {
+  ami           = "ami-2757f631"
+  instance_type = "t2.micro"
+}
 ```
 
-```css
-$ helm version
-version.BuildInfo{Version:"v3.2.3+4.el8", GitCommit:"2160a65177049990d1b76efc67cb1a9fd21909b1", GitTreeState:"clean", GoVersion:"go1.13.4"}
+```yaml
+# example Ansible playbook in Ansible
+- ec2:
+    key_name: mykey
+    instance_type: t2.micro
+    image: ami-123456
+    wait: yes
+    group: webserver
+    count: 3
+    vpc_subnet_id: subnet-29e63245
+    assign_public_ip: yes
 ```
 
-[helm-ocp-install]: https://docs.openshift.com/container-platform/4.4/cli_reference/helm_cli/getting-started-with-helm-on-openshift-container-platform.html
+Both codes are human readable and easy for administrators who may not have coding background to develop. As long as you have defined the "key words", which we refer to as `provider` and `resource` in Terraform, `modules` in Ansible, both Terraform and Ansible will be able to recognize them and perform the intended tasks. The entire list of usable "key words" are documented the official website of both tools. 
 
-## Installing Vault on OpenShift
+Terraform: [https://www.terraform.io/docs/configuration/index.html](https://www.terraform.io/docs/configuration/index.html)
+Ansible: [https://docs.ansible.com/ansible/latest/modules/modules_by_category.html](https://docs.ansible.com/ansible/latest/modules/modules_by_category.html)
 
-We will follow the HashiCorp's [official document][vault-minikube] as a guide to install Vault. In this guide, Vault is deployed with Consul as a backend.
+### Readily available resources
 
-[vault-minikube]: https://learn.hashicorp.com/vault/kubernetes/minikube
+From a user's perspective, the ease of developing these codes will help if there is a library of "templates" or "ready made code" available for reference, or even serve as a self service for users who may not be administrating the infrastructure. In Terraform, the piece of code is called `module` (not to be confused with the Ansible module), while in Ansible, it is refered as `playbook`. The snippet which I have shared earlier can be considered as a `module` or `playbook` respectively.
 
+Both tools do boast the availability of a library of codes available for users to use. 
+
+For Terraform, `modules` for common use cases (most of it are for cloud providers) are stored in [Terraform Registry] (https://registry.terraform.io/browse/providers). There are some commnuity ones as well. These `modules` are verified and are official, supported by HashiCorp.
+
+For Ansible, the `playbooks` repository can be retrieved from [Ansible Galaxy](galaxy.ansible.com). The `playbooks` here are contributed mainly by the community.   
+
+### Stateful vs Stateless
+
+Terraform in this case is stateful, as it keeps track of the changes applied before and after in the working directory in the form of a `terraform.tfstate` file. 
+
+Ansible on the other hand is idempotent
 
 ### Install the Consul Helm chart
 
