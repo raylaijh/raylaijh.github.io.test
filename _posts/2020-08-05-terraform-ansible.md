@@ -95,9 +95,11 @@ Terraform Enterprise builds primarily on Terraform Cloud, which offers remote ex
 
 Ansible Tower supports clustering, and HA failover. This allows users to deploy multiple Ansible Tower instances across environment, and recover from disasters in case of a failure. 
 
-> There are other features with regards to the enterprise versions of both tools which I did not include. The use cases for both are not the same and I feel that they should't be compared in this way.
+> There are other features with regards to the enterprise versions of both tools which I did not include, but both versions are definitely targeted at different use cases.
 
 
 ## Summary and Conclusion
 
-Overall, I do feel that both tools are good tools to use. They are easy to install, and the coding knowledge required to use them is minimal. Both tools are agentless as well. In my opinion, Terraform is a better tool to create infrastructure from scratch, especially on cloud providers, given the readily available `modules`. Ansible will be a better tool for configuration after the initial infrastructure provisioning, as the basis of its operations lies in the `inventory`, which defines the target machines to run the `playbooks` on, which implicitly implies that the machines/instances have to be available beforehand (although we can also execute on localhost or bastion host first, at pre provisioning phase, which works as well). There are definitely more in depth features of each product that I have yet to cover in this post, but both are definitely great tools to use for Infrastructure as a Code. 
+Overall, I do feel that both tools are good tools to use. They are easy to install, and the coding knowledge required to use them is minimal. Both tools are agentless as well. In my opinion, Terraform is a better tool to create infrastructure from scratch, especially on cloud providers, given the readily available `modules`. Ansible will be a better tool for configuration after the initial infrastructure provisioning, as the basis of its operations lies in the `inventory`, which defines the target machines to run the `playbooks` on, which implicitly implies that the machines/instances have to be available beforehand (although we can also execute on localhost or bastion host first, at pre provisioning phase, which works as well). 
+
+There are definitely more in depth features of each product that I did not cover in this post, but both are definitely great tools to use for Infrastructure as a Code. 
