@@ -1,5 +1,5 @@
 ---
-title: "Terraform or Ansible?"
+title: "Infrastructure as a Code: Terraform or Ansible?"
 tags: 
   - ansible
   - redhat
@@ -7,9 +7,11 @@ tags:
   - terraform
 ---
 
+This post serves as introductory post to Infrastructure as a Code and its benefits. In this post, I will share some high level benefits of using tools like Terraform and Ansible to leverage on the benefits of Infrastructure as a Code. The following content are not meant to be too technical, and are based on my personal experiences after these two tools.
+
 ### What is Infrastructure as a Code?
 
-With the advent of technology in the 21st century, more and more organizations are beginning to embrace technology in their environment. This rising trend creates an ever increasing demand for new IT infrastructure, which also gives rise to many different options in the market. With so many options, many companies tend to end up adopting multiple cloud setups, running in their workloads. Managing all these different setups can be complex and often mundane, as system administrators had manually manage and configure the hardware and software that are required to run applications.
+With the advent of technology in the 21st century, more and more organizations are beginning to embrace technology in their environment. This rising trend creates an ever increasing demand for new IT infrastructure, which also gives rise to many different options in the market. With so many options, many companies tend to end up adopting multiple cloud setups, running in their workloads. Managing all these different setups can be complex and often repetitive, as system administrators had manually manage and configure the hardware and software that are required to run applications. These tasks usually entail creating virtual machines/instances, installing OS, configuring storage and network, etc.
 
 However, in the recent years, several solutions are available in the market in order to help organizations manage all these infrastructure in a automated and repeated manner. The cricital component of such solutions revolve around using "Infrastructure as a Code (IaC)". Here is how [Wikipedia][wikilink] defines IaC:
 
@@ -71,7 +73,7 @@ Ansible: [https://docs.ansible.com/ansible/latest/modules/modules_by_category.ht
 
 ### Readily available resources
 
-From a user's perspective, the ease of developing these codes will help if there is a library of "templates" or "ready made code" available for reference, or even serve as a self service for users who may not be administrating the infrastructure. In Terraform, the piece of code is called `module` (not to be confused with the Ansible module), while in Ansible, it is refered as `playbook`. The snippet which I have shared earlier can be considered as a `module` or `playbook` respectively.
+From a user's perspective, the ease of developing these codes will help if there is a library of "templates" or "ready made code" available for reference, or even serve as a self service for users who may not be administrating the infrastructure layer. In Terraform, the piece of code is called `module` (not to be confused with the Ansible module), while in Ansible, it is refered as `playbook`. The snippet which I have shared earlier can be considered as a `module` or `playbook` respectively.
 
 Both tools do boast the availability of a library of codes available for users to use. 
 
@@ -81,128 +83,21 @@ For Ansible, the `playbooks` repository can be retrieved from [Ansible Galaxy](g
 
 ### Stateful vs Stateless
 
-Terraform in this case is stateful, as it keeps track of the changes applied before and after in the working directory in the form of a `terraform.tfstate` file. 
+Terraform in this case is stateful, as it keeps track of the changes applied before and after in the working directory in the form of a `terraform.tfstate` file. This helps users to visualize potential changes prior to running the `module`, often with `terraform plan`, and reverting back to previous state if required - `terraform destroy`.
 
-Ansible on the other hand is idempotent
+Ansible on the other hand is stateless, meaning to say, it does not know the current state of your infrastructure. Whenever the `playbook` runs, it does the check, and changes it to the desired state if required. 
 
-### Install the Consul Helm chart
+### UI version
 
-Consul is a service mesh solution that launches with a key-value store. Vault requires a storage backend like Consul to manage its configuration and secrets when it is run in high-availability.
+Both Terraform and Ansible comes with the UI version, in the form of Terraform Enterprise and Ansible Tower. Both have an API endpoints, which allows users to interact via API calls. However, both versions are meant for different use cases.
 
-The recommended way to run Consul on Kubernetes is via the Helm chart. Helm is a package manager that installs and configures all the necessary components to run Consul in several different modes. A Helm chart includes templates that enable conditional and parameterized execution. These parameters can be set through command-line arguments or defined in YAML.
+Terraform Enterprise builds primarily on Terraform Cloud, which offers remote execution and state management (imagine the `terraform.tfstate` file is no longer required, as it is taken care on Terraform Cloud), which faciliates a collaboration of `module` developement via Version Control System (VCS), like Github. The purpose is to ensure that Terraform runs in a consistent and reliable environment.
 
-Create `helm-consul-values.yml` with the following contents:
-```yaml
-global:
-  datacenter: vault-kubernetes-guide
+Ansible Tower supports clustering, and HA failover. This allows users to deploy multiple Ansible Tower instances across environment, and recover from disasters in case of a failure. 
 
-client:
-  enabled: true
-
-server:
-  replicas: 1
-  bootstrapExpect: 1
-  disruptionBudget:
-    maxUnavailable: 0
-```
-
-Add the HashiCorp Helm repository.
-```css
-$ helm repo add hashicorp https://helm.releases.hashicorp.com
-"hashicorp" has been added to your repositories
-```
-
-Install the latest version of the Consul Helm chart with parameters `helm-consul-values.yml` applied.
-```css
-$ helm install consul hashicorp/consul --values helm-consul-values.yml
-```
-
-Get all the pods within the default namespace. The Consul client and server pods are displayed here prefixed with `consul`.You should see 1x consul-server pods and N consul pods, where N is the number of worker nodes in the cluster.
-
-Wait until the server and client pods report that they are `Running` and ready `(1/1)`.
-```css
-$ oc get pods -n default
-NAME                                    READY   STATUS    RESTARTS   AGE
-consul-consul-2llf7                     1/1     Running   0          20s
-consul-consul-6p7bb                     1/1     Running   0          20s
-consul-consul-server-0                  1/1     Running   0          20s
-```
-
-### Install the Vault Helm chart
-
-The recommended way to run Vault on OpenShift is via the Helm chart. 
-
-Create `helm-vault-values.yml`
-```yaml
-server:
-  affinity: ""
-  ha:
-    enabled: true
-```
-
-Install the latest version of the Vault Helm chart with parameters `helm-vault-values.yml` applied
-```css
-helm install vault hashicorp/vault --values helm-vault-values.yml
-```
-
-The Vault pods and Vault Agent Injector pod are deployed in the default namespace.
-
-Get all pods running in the default namespace
-```css
-$ oc get pods -n default
-
-NAME                                    READY   STATUS    RESTARTS   AGE
-consul-consul-2llf7                     1/1     Running   0          1m3s
-consul-consul-6p7bb                     1/1     Running   0          1m3s
-consul-consul-server-0                  1/1     Running   0          1m3s
-vault-0                                 0/1     Running   0          2m5s
-vault-1                                 0/1     Running   0          2m5s
-vault-2                                 0/1     Running   0          2m5s
-vault-agent-injector-7898f4df86-trdjn   1/1     Running   0          2m5s
-```
-
-The `vault-0`, `vault-1`, `vault-2`, and `vault-agent-injector` pods are deployed. The Vault servers report that they are `Running` but they are not ready `(0/1)`. That is because Vault in each pod is executes a status check defined in a readinessProbe. The readinessProbe is failing because the Vault pods are sealed.
-
-### Initialize and unseal Vault
-
-Initialize Vault with one key share and one key threshold. The unseal key is extracted and stored in `cluster-keys.json`
-```css
-$ oc exec vault-0 -- vault operator init -key-shares=1 -key-threshold=1 -format=json > cluster-keys.json
-```
+> There are other features with regards to the enterprise versions of both tools which I did not include. The use cases for both are not the same and I feel that they should't be compared in this way.
 
 
-To display the unseal key:
-```css
-$ cat cluster-keys.json | jq -r ".unseal_keys_b64[]"
-GDibK7TonxYICNjwvsxidNnwfh8YsYkG3kylZ+lV7lE=
-```
+## Summary and Conclusion
 
-> Insecure operation: Do not run an unsealed Vault in production with a single key share and a single key threshold. This approach is only used here to simplify the unsealing process for this demonstration.
-
-Create a variable named VAULT_UNSEAL_KEY to capture the Vault unseal key.
-```css
-$ VAULT_UNSEAL_KEY=$(cat cluster-keys.json | jq -r ".unseal_keys_b64[]")
-```
-
-Unseal all the Vault pods one by one
-```css
-$ oc exec vault-0 -- vault operator unseal $VAULT_UNSEAL_KEY
-$ oc exec vault-1 -- vault operator unseal $VAULT_UNSEAL_KEY
-$ oc exec vault-2 -- vault operator unseal $VAULT_UNSEAL_KEY
-```
-
-Now all the Vault pods should be `Running` at `(1/1)`
-```css
-$ oc get pods -n default
-NAME                                    READY   STATUS    RESTARTS   AGE
-consul-consul-2llf7                     1/1     Running   0          4h34m
-consul-consul-6p7bb                     1/1     Running   0          4h34m
-consul-consul-server-0                  1/1     Running   0          4h34m
-vault-0                                 1/1     Running   0          4h33m
-vault-1                                 1/1     Running   0          4h33m
-vault-2                                 1/1     Running   0          4h33m
-vault-agent-injector-7898f4df86-trdjn   1/1     Running   0          4h33m
-```
-
-Now you should have a Vault instance running on your OpenShift cluster! Next we'll learn how to use Vault to provide secrets to applications running on OpenShift
-
+Overall, I do feel that both tools are good tools to use. They are easy to install, and the coding knowledge required to use them is minimal. Both tools are agentless as well. In my opinion, Terraform is a better tool to create infrastructure from scratch, especially on cloud providers, given the readily available `modules`. Ansible will be a better tool for configuration after the initial infrastructure provisioning, as the basis of its operations lies in the `inventory`, which defines the target machines to run the `playbooks` on, which implicitly implies that the machines/instances have to be available beforehand (although we can also execute on localhost or bastion host first, at pre provisioning phase, which works as well). There are definitely more in depth features of each product that I have yet to cover in this post, but both are definitely great tools to use for Infrastructure as a Code. 
