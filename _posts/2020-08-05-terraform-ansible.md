@@ -92,12 +92,20 @@ Ansible on the other hand is stateless, meaning to say, it does not know the cur
 
 Both Terraform and Ansible comes with the UI version, in the form of Terraform Enterprise and Ansible Tower. Both offers REST API endpoint, which allows users to interact via API calls. 
 
+<center>
+<img align="center" src="/assets/images/terraform_cloud.png" alt=""> 
+  <figcaption>How Terraform Cloud works</figcaption>
+</center>
 
-Terraform Enterprise builds primarily on Terraform Cloud, which offers remote execution and state management (imagine the `terraform.tfstate` file is no longer required, as it is taken care on Terraform Cloud), which faciliates a collaboration of `module` developement via Version Control System (VCS), like Github. The purpose is to ensure that Terraform runs in a consistent and reliable environment.
+Terraform Enterprise builds primarily on Terraform Cloud, which offers remote execution and state management (imagine the `terraform.tfstate` file is no longer required, as it is taken care on Terraform Cloud), which faciliates a collaboration of `module` developement via Version Control System (VCS), like Github. The purpose is to ensure that Terraform runs in a consistent and reliable environment, and the only source of truth will be whatever that is on the VCS repository.
+
+<center>
+<img align="center" src="/assets/images/ansible_tower_sample.png" alt=""> 
+  <figcaption>Sample Ansible Tower reference architecture</figcaption>
+</center>
 
 
-
-Ansible Tower primarily is meant better organization control with RBAC features. In addition, it also supports clustering, and HA failover. This allows users to deploy multiple Ansible Tower instances across environment, and recover from disasters in case of a failure. 
+Ansible Tower is meant better organization control with RBAC features. In addition, it also supports clustering, and HA failover. This allows users to deploy multiple Ansible Tower instances across environment, and recover from disasters in case of a failure. 
 
 > There are many other features with regards to the enterprise versions of both tools which I did not include, but both versions are definitely targeted at different use cases.
 
@@ -109,6 +117,15 @@ You can refer to the the official documentation for further features of both too
 
 ## Summary and Conclusion
 
-Overall, I do feel that both tools are good tools to use. They are easy to install, and the coding knowledge required to use them is minimal. Both tools are agentless as well. In my opinion, Terraform is a better tool to create infrastructure from scratch, especially on cloud providers, given the readily available `modules`, which are on the official supported `Terraform Modules Registry`. Ansible will be a better tool for configuration for post infrastructure provisioning, as the basis of its operations lies in the `inventory`, which defines the target machines to run the `playbooks` on. This design implicitly implies that the machines/instances have to be available beforehand (although we can also execute on localhost or bastion host first, at pre provisioning phase, which works as well). 
+Overall, I do feel that both tools are good tools to use. They are easy to install and code. Both tools are agentless as well. In my opinion, Terraform is a better tool to create infrastructure from scratch, especially on cloud providers, given the readily available `modules`, which are on the official supported `Terraform Modules Registry`. Ansible will be more suited for configuration for post infrastructure provisioning, as the basis of its operations lies in the `inventory`, which defines the target machines to run the `playbooks` on. This design implicitly implies that the machines/instances have to be available beforehand (although we can also execute on localhost or bastion host first, at pre provisioning phase, which works as well). 
 
-There are definitely more in depth features of each product that I did not cover in this post, but both are definitely great tools to use for Infrastructure as a Code. 
+While Terraform keeps track of the state with `terraform.tfstate`, it allows user to easily know what is the current state. This comes as a double edge sword as well. This also means that the `terraform.tfstate` file has to be managed by the users. You will not have that problem with Ansible, as Ansible only goes one way - to reach the desired state defined in the `playbook`.
+
+The UI versions for both tools have more enterprise features for each of them but they are meant for different use cases, so it is up to the users to decide which is more applicable for them. 
+
+<center>
+<img align="center" src="/assets/images/ansible_vs_terraform.png" alt=""> 
+  <figcaption>Quick comparison between Terraform and Ansible</figcaption>
+</center>
+
+The above table shows a summary of what I have discussed. There are definitely more in depth features of each product that I did not cover in this post, but both are definitely great tools to use for Infrastructure as a Code in my opinion.
