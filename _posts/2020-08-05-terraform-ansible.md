@@ -111,9 +111,9 @@ Ansible Tower is meant better organization control with RBAC features. In additi
 
 You can refer to the the official documentation for further features of both tools:
 
-* Terraform Cloud: https://www.terraform.io/docs/cloud/index.html
-* Ansible Tower: https://docs.ansible.com/ansible/latest/reference_appendices/tower.html
-* Ansible Tower HA and Disaster Recovery blog: https://servicesblog.redhat.com/2019/04/08/ansible-tower-high-availability-and-disaster-recovery/
+* Terraform Cloud: [https://www.terraform.io/docs/cloud/index.html](https://www.terraform.io/docs/cloud/index.html)
+* Ansible Tower: [https://docs.ansible.com/ansible/latest/reference_appendices/tower.html](https://docs.ansible.com/ansible/latest/reference_appendices/tower.html)
+* Ansible Tower HA and Disaster Recovery blog: [https://servicesblog.redhat.com/2019/04/08/ansible-tower-high-availability-and-disaster-recovery/](https://servicesblog.redhat.com/2019/04/08/ansible-tower-high-availability-and-disaster-recovery/)
 
 ## Summary and Conclusion
 
