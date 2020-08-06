@@ -11,6 +11,10 @@ This post serves as introductory post to Infrastructure as a Code and its benefi
 
 ### What is Infrastructure as a Code?
 
+<center>
+<img align="center" src="/assets/images/infra_as_code.png" alt=""> 
+</center>
+
 With the advent of technology in the 21st century, more and more organizations are beginning to embrace technology in their environment. This rising trend creates an ever increasing demand for new IT infrastructure, which also gives rise to many different options in the market. With so many options, many companies tend to end up adopting multiple cloud setups to run their workloads. Managing all these different setups can be complex and often repetitive, as system administrators had manually manage and configure the hardware and software that are required to run applications. These tasks usually entail creating virtual machines/instances, installing OS, configuring storage and network, etc. 
 
 The way of application development has become more robust as well. Adoption of modern infrastructures such as Kubernetes facilliates the use of Agile methdology as compared to the traditional Waterfall. This means that testing get vigorous in different stages of app development and, means more development environment needs to be created and destroyed on demand for testing purposes. This pushes a futher need for a way to automate the provisioning of these resources.
