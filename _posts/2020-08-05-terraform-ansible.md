@@ -93,7 +93,7 @@ Ansible on the other hand is stateless, meaning to say, it does not know the cur
 Both Terraform and Ansible comes with the UI version, in the form of Terraform Enterprise and Ansible Tower. Both offers REST API endpoint, which allows users to interact via API calls. 
 
 <center>
-<img align="center" src="/assets/images/terraform_cloud.png" alt=""> 
+<img align="center" src="/assets/images/terrform_cloud.png" alt=""> 
   <figcaption>How Terraform Cloud works</figcaption>
 </center>
 
