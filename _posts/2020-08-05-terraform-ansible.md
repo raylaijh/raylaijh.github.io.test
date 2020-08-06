@@ -7,24 +7,26 @@ tags:
   - terraform
 ---
 
-This post serves as introductory post to Infrastructure as a Code and its benefits. In this post, I will share some high level benefits of using tools like Terraform and Ansible to leverage on the benefits of Infrastructure as a Code. The following content are not meant to be too technical, and are based on my personal experiences after these two tools.
+This post serves as introductory post to Infrastructure as a Code and its benefits. In this post, I will share some high level benefits of using tools like Terraform and Ansible to leverage on the benefits of Infrastructure as a Code. The following content are not meant to be too technical, and are based on my personal experiences after these two tools. 
 
 ### What is Infrastructure as a Code?
 
-With the advent of technology in the 21st century, more and more organizations are beginning to embrace technology in their environment. This rising trend creates an ever increasing demand for new IT infrastructure, which also gives rise to many different options in the market. With so many options, many companies tend to end up adopting multiple cloud setups, running in their workloads. Managing all these different setups can be complex and often repetitive, as system administrators had manually manage and configure the hardware and software that are required to run applications. These tasks usually entail creating virtual machines/instances, installing OS, configuring storage and network, etc.
+With the advent of technology in the 21st century, more and more organizations are beginning to embrace technology in their environment. This rising trend creates an ever increasing demand for new IT infrastructure, which also gives rise to many different options in the market. With so many options, many companies tend to end up adopting multiple cloud setups to run their workloads. Managing all these different setups can be complex and often repetitive, as system administrators had manually manage and configure the hardware and software that are required to run applications. These tasks usually entail creating virtual machines/instances, installing OS, configuring storage and network, etc. 
 
-However, in the recent years, several solutions are available in the market in order to help organizations manage all these infrastructure in a automated and repeated manner. The cricital component of such solutions revolve around using "Infrastructure as a Code (IaC)". Here is how [Wikipedia][wikilink] defines IaC:
+The way of application development has become more robust as well. Adoption of modern infrastructures such as Kubernetes facilliates the use of Agile methdology as compared to the traditional Waterfall. This means that testing get vigorous in different stages of app development and, means more development environment needs to be created and destroyed on demand for testing purposes. This pushes a futher need for a way to automate the provisioning of these resources.
+
+In the recent years, several solutions are available in the market in order to help organizations manage all these infrastructure in a automated and repeated manner. The cricital component of such solutions revolve around using "Infrastructure as a Code (IaC)". Here is how [Wikipedia][wikilink] defines IaC:
 
 [wikilink]: https://en.wikipedia.org/wiki/Infrastructure_as_code
 
 > "Infrastructure as code is the process of managing and provisioning computer data centers through machine-readable definition files, rather than physical hardware configuration or interactive configuration tools" 
 
-The idea of "Infrastructure as a Code" allows the definition of the desired infrastructure setup to be condensed in a code and then be consumed on demand. Defining the infrastructure in a machine readable format is the first step of automation. Once that is done, we can store these code somewhere, and use to automate the provisioning or maintaince of the infrastructure, in the way which we want it to be. In this way, we can achieve speed in deployment, consistency in rolling out and full tracibility of configuration made to the infrastructure. All these benefits also mean saving time and money. 
+The idea of "Infrastructure as a Code" allows the definition of the desired infrastructure setup to be condensed in a code and then be consumed on demand. Defining the infrastructure in a machine readable format is the first step of automation. Once that is done, we can store these code somewhere, and use to automate the provisioning or maintaince of the infrastructure, in the way which we want it to be. In this way, we can achieve speed in deployment, consistency in rolling out and full tracibility of configurations made to the infrastructure portion. All these benefits also mean saving time and money. 
 
 
 ## IaC options 
 
-There are currently many options in the market which allows users to reap on the benefits of IaC. Ideally, the tool used should preferrable be platform agnostic, so that the same tool can be used to manage multiple cloud providers. In this post, I will share on mainly the two tools which I have experienced using, which are Terraform and Ansible. Both are Open Source options and you can check their upstream GitHub for more information. Also, you can checkout both HashiCorp and Red Hat official documentation as well.
+There are currently many options in the market which allows users to reap on the benefits of IaC. Ideally, the tool used should preferrably be platform agnostic, so that the same tool can be used to manage multiple cloud providers. In this post, I will share on mainly the two tools which I have experienced using, which are Terraform and Ansible. Both are Open Source options and you can check their upstream GitHub for more information. Also, you can checkout both HashiCorp and Red Hat official documentation as well.
 
 
 * Ansible GitHub: [https://github.com/ansible/ansible](https://github.com/ansible/ansible)
@@ -87,17 +89,26 @@ Ansible on the other hand is stateless, meaning to say, it does not know the cur
 
 ### UI version
 
-Both Terraform and Ansible comes with the UI version, in the form of Terraform Enterprise and Ansible Tower. Both have an API endpoints, which allows users to interact via API calls. However, both versions are meant for different use cases.
+
+Both Terraform and Ansible comes with the UI version, in the form of Terraform Enterprise and Ansible Tower. Both offers REST API endpoint, which allows users to interact via API calls. 
+
 
 Terraform Enterprise builds primarily on Terraform Cloud, which offers remote execution and state management (imagine the `terraform.tfstate` file is no longer required, as it is taken care on Terraform Cloud), which faciliates a collaboration of `module` developement via Version Control System (VCS), like Github. The purpose is to ensure that Terraform runs in a consistent and reliable environment.
 
-Ansible Tower supports clustering, and HA failover. This allows users to deploy multiple Ansible Tower instances across environment, and recover from disasters in case of a failure. 
 
-> There are other features with regards to the enterprise versions of both tools which I did not include, but both versions are definitely targeted at different use cases.
 
+Ansible Tower primarily is meant better organization control with RBAC features. In addition, it also supports clustering, and HA failover. This allows users to deploy multiple Ansible Tower instances across environment, and recover from disasters in case of a failure. 
+
+> There are many other features with regards to the enterprise versions of both tools which I did not include, but both versions are definitely targeted at different use cases.
+
+You can refer to the the official documentation for further features of both tools:
+
+* Terraform Cloud: https://www.terraform.io/docs/cloud/index.html
+* Ansible Tower: https://docs.ansible.com/ansible/latest/reference_appendices/tower.html
+* Ansible Tower HA and Disaster Recovery blog: https://servicesblog.redhat.com/2019/04/08/ansible-tower-high-availability-and-disaster-recovery/
 
 ## Summary and Conclusion
 
-Overall, I do feel that both tools are good tools to use. They are easy to install, and the coding knowledge required to use them is minimal. Both tools are agentless as well. In my opinion, Terraform is a better tool to create infrastructure from scratch, especially on cloud providers, given the readily available `modules`. Ansible will be a better tool for configuration after the initial infrastructure provisioning, as the basis of its operations lies in the `inventory`, which defines the target machines to run the `playbooks` on, which implicitly implies that the machines/instances have to be available beforehand (although we can also execute on localhost or bastion host first, at pre provisioning phase, which works as well). 
+Overall, I do feel that both tools are good tools to use. They are easy to install, and the coding knowledge required to use them is minimal. Both tools are agentless as well. In my opinion, Terraform is a better tool to create infrastructure from scratch, especially on cloud providers, given the readily available `modules`, which are on the official supported `Terraform Modules Registry`. Ansible will be a better tool for configuration for post infrastructure provisioning, as the basis of its operations lies in the `inventory`, which defines the target machines to run the `playbooks` on. This design implicitly implies that the machines/instances have to be available beforehand (although we can also execute on localhost or bastion host first, at pre provisioning phase, which works as well). 
 
 There are definitely more in depth features of each product that I did not cover in this post, but both are definitely great tools to use for Infrastructure as a Code. 
