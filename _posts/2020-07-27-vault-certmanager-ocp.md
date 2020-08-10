@@ -27,7 +27,7 @@ Most of the steps documented below are taken from Vault documentation [here][vau
 
 The following are required prior to the setup:
 
-  * Running OpenShift cluster
+  * Running OpenShift cluster (I am using OpenShift 4.4 in this example)
   * Helm CLI installed (Refer [here][helm-ocp-install] to learn how to install Helm CLI on OpenShift 4)
   * Vault running on OpenShift (refer to previous blog entry [here][vault-ocp])
   
